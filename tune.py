@@ -1,10 +1,9 @@
 import notesData 
-import freqData
 
 def findClosestNote(f):
     noteFreq=-1
     previousDistance=-1
-    for curNote in freqData.freq:
+    for curNote in notesData.notes.keys():
         curDistance=abs(curNote-f)
         if previousDistance==-1 or curDistance<previousDistance:
             noteFreq=curNote
