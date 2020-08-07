@@ -1,11 +1,18 @@
-import notesData 
+notesData={} #notesData = { freq: note }
+
+#Read data form file "data" in the current directory
+with open("data", "r") as inputF:
+    for line in inputF:
+        elems=line.strip().split()
+        notesData[float(elems[1])]=elems[0]
 
 def findClosestNote(f):
-    noteFreq=-1
-    previousDistance=-1
-    for curNote in notesData.notes.keys():
+    #finds the closest note to frequency f
+    noteFreq=None
+    previousDistance=None
+    for curNote in notesData.keys():
         curDistance=abs(curNote-f)
-        if previousDistance==-1 or curDistance<previousDistance:
+        if (not previousDistance) or curDistance<previousDistance:
             noteFreq=curNote
         previousDistance=curDistance
     return noteFreq
@@ -21,7 +28,7 @@ with open("sample.csv", "r") as inputFile:
             print("Average of (%s,%s): %s"%(nums[0], nums[1], avrg))
             notesfreq=findClosestNote(avrg)
             print("Note Freq: %s"%notesfreq)
-            note=notesData.notes[notesfreq]
+            note=notesData[notesfreq]
             print("Note: %s"%note)
             outputFile.write(cells[0]+';'+str(avrg)+';'+'\"'+note+'\"'+';'+str(notesfreq)+'\n')
         
